@@ -1,389 +1,39 @@
-|Logo XML Travelgate|
-
-`api docs </Docs/API-Specification/Main.html>`__
-
 XML Travelgate Hotel API
 ========================
-
---------------
 
 Table Of Contents
 -----------------
 
-#. `Change Log <#Change%20Log>`__
-#. `Intro <#Intro>`__
-#. `Audience <#Audience>`__
-#. `Document Goals <#Document%20Goals>`__
-#. `Service Endpoints <#Service%20Endpoints>`__
-#. `Hotel FAQ </Wiki/0/hotel-faq>`__ (**soon**)
-#. `Anatomy of a Request <#Anatomy%20of%20a%20Request>`__ Anatomy of a
-   Request
-#. `General Structure <#General%20Structure>`__
+.. toctree::
+  :maxdepth: 2
+  :numbered:
+  :titlesonly:
+  "Change Log" <change-log>
+  "Intro" <intro>
+  "Audience" <audience>
+  "Anatomy of a Request" <anatomy-of-a-request>
+  "Document Goals" <Document-Goals>
+  "Service Endpoints" <service-endpoints>
+  "General Structure" <general-structure>
 
-   #. `Data Structure <#Data%20Structure>`__
 
-      #. `Common Elements <#Common%20Elements>`__
 
-         #. `Common Elements RQ
-            Example <#Common%20Elements%20RQ%20Example>`__
-         #. `Common Elements RQ
-            Description <#Common%20Elements%20RQ%20Description>`__
-         #. `Common Elements RS
-            Example <#Common%20Elements%20RS%20Example>`__
-         #. `Common Elements RS
-            Description <#Common%20Elements%20RS%20Description>`__
 
-      #. *`Avail <#Avail>`__* (Availability)
 
-         #. `Avail RQ Example <#Avail%20RQ%20Example>`__
-         #. `Avail RQ Description <#Avail%20RQ%20Description>`__
-         #. `Avail RS Example <#Avail%20RS%20Example>`__
-         #. `Avail RS Description <#Avail%20RS%20Description>`__
-
-      #. *`Valuation <#Valuation>`__* (Pre-Booking)
-
-         #. `Valuation RQ Example <#Valuation%20RQ%20Example>`__
-         #. `Valuation RQ Description <#Valuation%20RQ%20Description>`__
-         #. `Valuation RS Example <#Valuation%20RS%20Example>`__
-         #. `Valuation RS Description <#Valuation%20RS%20Description>`__
-
-      #. *`Reservation <#Reservation>`__* (Booking)
-
-         #. `Reservation RQ Example <#Reservation%20RQ%20Example>`__
-         #. `Reservation RQ
-            Description <#Reservation%20RQ%20Description>`__
-         #. `Reservation RS Example <#Reservation%20RS%20Example>`__
-         #. `Reservation RS
-            Description <#Reservation%20RS%20Description>`__
-
-      #. *`ReservationRead <#ReservationRead>`__* (Booking Details)
-
-         #. `ReservationRead RQ
-            Example <#ReservationRead%20RQ%20Example>`__
-         #. `ReservationRead RQ
-            Description <#ReservationRead%20RQ%20Description>`__
-         #. `ReservationRead RS
-            Example <#ReservationRead%20RS%20Example>`__
-         #. `ReservationRead RS
-            Description <#ReservationRead%20RS%20Description>`__
-
-      #. *`ReservationList <#ReservationList>`__* (Booking List)
-
-         #. `ReservationList RQ
-            Example <#ReservationList%20RQ%20Example>`__
-         #. `ReservationList RQ
-            Description <#ReservationList%20RQ%20Description>`__
-         #. `ReservationList RS
-            Example <#ReservationList%20RS%20Example>`__
-         #. `ReservationList RS
-            Description <#ReservationList%20RS%20Description>`__
-
-      #. *`Cancel <#Cancel>`__* (Booking Cancellation)
-
-         #. `Cancel RQ Example <#Cancel%20RQ%20Example>`__
-         #. `Cancel RQ Description <#Cancel%20RQ%20Description>`__
-         #. `Cancel RS Example <#Cancel%20RS%20Example>`__
-         #. `Cancel RS Description <#Cancel%20RS%20Description>`__
-
-      #. *`HotelList <#HotelList>`__* (Hotel List)
-
-         #. `HotelList RQ Example <#HotelList%20RQ%20Example>`__
-         #. `HotelList RQ Description <#HotelList%20RQ%20Description>`__
-         #. `HotelList RS Example <#HotelList%20RS%20Example>`__
-         #. `HotelList RS Description <#HotelList%20RS%20Description>`__
-
-      #. *`DescriptiveInfo <#DescriptiveInfo>`__* (Hotel Details)
-
-         #. `DescriptiveInfo RQ
-            Example <#DescriptiveInfo%20RQ%20Example>`__
-         #. `IDescriptiveInfo RQ
-            Description <#IDescriptiveInfo%20RQ%20Description>`__
-         #. `DescriptiveInfo RS
-            Example <#DescriptiveInfo%20RS%20Example>`__
-         #. `DescriptiveInfo RS
-            Description <#DescriptiveInfo%20RS%20Description>`__
-
-      #. *`AvailDestinationTree <#AvailDestinationTree>`__*
-         (Destinations Tree of Availability)
-
-         #. `AvailDestinationTree RQ
-            Example <#AvailDestinationTree%20RQ%20Example>`__
-         #. `AvailDestinationTree RQ
-            Description <#AvailDestinationTree%20RQ%20Description>`__
-         #. `AvailDestinationTree RS
-            Example <#AvailDestinationTree%20RS%20Example>`__
-         #. `AvailDestinationTree RS
-            Description <#AvailDestinationTree%20RS%20Description>`__
-
-      #. *`GeographicDestinationTree <#GeographicDestinationTree>`__*
-         (Geographic Destinations Tree)
-
-         #. `GeographicDestinationTree RQ
-            Example <#GeographicDestinationTree%20RQ%20Example>`__
-         #. `GeographicDestinationTree RQ
-            Description <#GeographicDestinationTree%20RQ%20Description>`__
-         #. `GeographicDestinationTree RS
-            Example <#GeographicDestinationTree%20RS%20Example>`__
-         #. `GeographicDestinationTree RS
-            Description <#GeographicDestinationTree%20RS%20Description>`__
-
-      #. *`MealPlanList <#MealPlanList>`__* (Mealplan List)
-
-         #. `MealPlanList RQ Example <#MealPlanList%20RQ%20Example>`__
-         #. `MealPlanList RQ
-            Description <#MealPlanList%20RQ%20Description>`__
-         #. `MealPlanList RS Example <#MealPlanList%20RS%20Example>`__
-         #. `MealPlanList RS
-            Description <#MealPlanList%20RS%20Description>`__
-
-      #. *`CategoryList <#CategoryList>`__* (Hotel Category List)
-
-         #. `CategoryList RQ Example <#CategoryList%20RQ%20Example>`__
-         #. `CategoryList RQ
-            Description <#CategoryList%20RQ%20Description>`__
-         #. `CategoryList RS Example <#CategoryList%20RS%20Example>`__
-         #. `CategoryList RS
-            Description <#CategoryList%20RS%20Description>`__
-
-      #. *`RoomList <#RoomList>`__* (Room Type List)
-
-         #. `RoomList RQ Example <#RoomList%20RQ%20Example>`__
-         #. `RoomList RQ Description <#RoomList%20RQ%20Description>`__
-         #. `RoomList RS Example <#RoomList%20RS%20Example>`__
-         #. `RoomList RS Description <#RoomList%20RS%20Description>`__
-
-      #. *`StaticConfiguration <#StaticConfiguration>`__* (Static
-         Configuration)
-
-         #. `StaticConfiguration RQ
-            Example <#StaticConfiguration%20RQ%20Example>`__
-         #. `StaticConfiguration RQ
-            Description <#StaticConfiguration%20RQ%20Description>`__
-         #. `StaticConfiguration RS
-            Example <#StaticConfiguration%20RS%20Example>`__
-         #. `StaticConfiguration RS
-            Description <#StaticConfiguration%20RS%20Description>`__
-
-      #. *`RuntimeConfiguration <#RuntimeConfiguration>`__* (RunTime
-         Configuration)
-
-         #. `RuntimeConfiguration RQ
-            Example <#RuntimeConfiguration%20RQ%20Example>`__
-         #. `RuntimeConfiguration RQ
-            Description <#RuntimeConfiguration%20RQ%20Description>`__
-         #. `RuntimeConfiguration RS
-            Example <#RuntimeConfiguration%20RS%20Example>`__
-         #. `RuntimeConfiguration RS
-            Description <#RuntimeConfiguration%20RS%20Description>`__
-
-      #. *`ModifyValuation <#ModifyValuation>`__* (Modify Valuation)
-
-         #. `ModifyValuation RQ
-            Example <#ModifyValuation%20RQ%20Example>`__
-         #. `ModifyValuation RQ
-            Description <#ModifyValuation%20RQ%20Description>`__
-         #. `ModifyValuation RS
-            Example <#ModifyValuation%20RS%20Example>`__
-         #. `ModifyValuation RS
-            Description <#ModifyValuation%20RS%20Description>`__
-
-      #. *`ModifyReservation <#ModifyReservation>`__*
-         (ModifyReservation)
-
-         #. `ModifyReservation RQ
-            Example <#ModifyReservation%20RQ%20Example>`__
-         #. `ModifyReservation RQ
-            Description <#ModifyReservation%20RQ%20Description>`__
-         #. `ModifyReservation RS
-            Example <#ModifyReservation%20RS%20Example>`__
-         #. `ModifyReservation RS
-            Description <#ModifyReservation%20RS%20Description>`__
-
---------------
-
-Change Log
-----------
-
-Version 1.0.1
-
-Date 11/01/2012
-
--  Specified Common Elements
--  Added Appendices
-
-| 
-
-Version 1.0.2
-
-Date 20/02/2012
-
--  AvailDestinationTree specified destinations only attackable on
-   availability
--  Added ISO country code in response Hotel
-
-| 
-
-Version 1.0.3
-
-Date 09/04/2012
-
--  New type errors in Valuation
-
-| 
-
-Version 1.0.4
-
-Date 13/06/2012
-
--  Larger PDI structure to charge hotel + ticket
--  Add ProveedorFacturacionExterna in confirmacionRS
-
-| 
-
-Version 1.0.5
-
-Date 30/07/2012
-
--  Correcting errors in the documentation
--  Add Promotions / Specials Offers in disponibilidadRS option
-
-| 
-
-Version 1.0.6
-
-Date 30/08/2012
-
--  Implemented three new calls: ReservationList, RuntimeConfigurationand
-   StaticConfiguration
--  Added attribute element level NuevaOpcion Offer
--  Appendix of countries and currencies
-
-| 
-
-Version 1.0.7
-
-Date 11/03/2013
-
--  Product specification download
--  Added element geographical destination in hotel
--  Implemented new call: GeographicDestinationTree
-
-| 
-
-Version 1.0.8
-
-Date 17/03/2014
-
--  `Bed information in
-   AvailRS <http://www.xmltravelgate.com/Wiki/1517#Beds%20information%20in%20AvailRS>`__
-
-| 
-
-Version 1.0.9
-
-Date 27/03/2014
-
--  `Modify
-   booking <http://www.xmltravelgate.com/Wiki/1517#Modify%20Booking>`__
-
-`toc <#toc>`__
-
---------------
-
-XML Travelgate Hotel API
-------------------------
-
-| The XML Travelgate Hotel API allows clients to access content from XL
-Travelgate's inventory of partners. Currently there are more than 70
-providers sources including switching platforms and hotel chains. Use
-this API to query, check for availability and book fares. It can be
-accessed by any third-party system such as tour-operator systems, B2C
-and B2B web applications or third-party applications. Scaleability is
-not an issue. Our systems are used to heavy load and monitored 24x7.
-| `toc <#toc>`__
-
---------------
-
-Audience
---------
-
-| This document is intended to a technical audience. Prior knowledge of
-XML is required.
-| Although it is recommended to have prior knowledge of XML integrations
-with airlines, ferries or railway carriers, it is not necessary.
-| `toc <#toc>`__
-
---------------
-
-Document Goals
---------------
-
-| This document aims to explain all aspects of **XML Travelgate**'s
-Hotel API specification. In the next pages you can find detailed
-explanation of all Nodes, Elements and Attributes of every aspect of the
-API specification.
-| It uses a very straight forward nomenclature that tries to define
-every aspect of the specification by the name.
-| This documentation follows a standard. For every method there is:
-
-#. Method Description
-
-   #. Method Goals: What does it do, how does it do it?
-   #. Request Format: General information on how is the request is
-      formed.
-   #. Response Format: General information on how is the response is
-      returned.
-   #. Remarks: Any remark / explanation about this method
-
-#. Example Request
-
-   #. Full explanation of all nodes, elements and attributes
-
-#. Example Response
-
-   #. Full explanation of all nodes, elements and attributes
-
-| 
-| Every method, element, attribute or node name is in *italic*.
-| 
-| For any questions or comments please send an email to
-hotel@xmltravelgate.com
-| `toc <#toc>`__
-
---------------
-
-Service Endpoints
------------------
-
-| Service Endpoints, WSDLs and XML schemas describing the request and
-response XML structures can be found in:
-
--  Service Definitions:
-   `http://www.xmltravelgate.com/Docs/API-Specification/Hub.html#Service%20Endpoints <http://www.xmltravelgate.com/Docs/API-Specification/Hub.html#Service%20Endpoints>`__
-
-Each request **must** be sent to the service url.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-`toc <#toc>`__
-
---------------
 
 Anatomy of a Request
 --------------------
 
-| Requests to the Service URL are explained in detail
+Requests to the Service URL are explained in detail
 `here <http://www.xmltravelgate.com/Docs/API-Specification/Hub.html>`__
-| `toc <#toc>`__
 
---------------
 
 General Structure
------------------
+^^^^^^^^^^^^^^^^^
 
-| The structure of the API specification follows a standard. This
-document intends to explain every aspect of this structure and their
-fields.
-| The integration will have the following methods:
+The structure of the API specification follows a standard. This document intends to explain every aspect of this structure and their fields.
+
+The integration will have the following methods:
 
 +--------------------------------------------------------------+-------------------------------+-------------------------------+------------+----------------------------------------------+
 | Method                                                       | Input                         | Output                        | Required   | Description                                  |
@@ -423,34 +73,29 @@ fields.
 | `ModifyReservation <#ModifyReservation>`__                   | ModifyReservationRQ           | ModifyReservationRS           | No         | Confirm a booking modification               |
 +--------------------------------------------------------------+-------------------------------+-------------------------------+------------+----------------------------------------------+
 
-| 
-| Each request sent to the **service url** requires a node called
-*rqXML*. Inside this node travels the current method's Input object.
-| `toc <#toc>`__
 
---------------
+Each request sent to the **service url** requires a node called
+
+*rqXML*. Inside this node travels the current method's Input object.
+
+
 
 Data Structure
 ~~~~~~~~~~~~~~
 
-| The data structure will always have common elements in all objects and
+The data structure will always have common elements in all objects and
 the specific objects related to the operation
-| `toc <#toc>`__
 
---------------
 
 Common Elements
 ^^^^^^^^^^^^^^^
 
-| This node will be in every request and response objects.
-| The request objects contains the provider's configuration, urls and
-credentials.
-| The response object contains the operation status and errors if any.
-| `toc <#toc>`__
+This node will be in every request and response objects. 
 
---------------
+The request objects contains the provider's configuration, urls and credentials.
 
-| 
+The response object contains the operation status and errors if any.
+
 
 Common Elements RQ Example
 ''''''''''''''''''''''''''

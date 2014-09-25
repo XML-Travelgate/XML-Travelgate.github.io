@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 3
 
    Intro <intro>
-   hotel
+   ./hotel/*
 
 
 
